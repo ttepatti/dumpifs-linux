@@ -1,6 +1,9 @@
 # dumpifs-linux
 This is a dirty hack of QNX's dumpifs utility, intended for use on non-QNX Linux systems. A compiled x86-64 ELF is included in the repository, along with the resources to compile the tool on a system without the QNX SDP.
 
+**Credit:**
+This tool was originally forked from [askac's dumpifs hack](https://github.com/askac/dumpifs), with [sickcodes'](https://github.com/sickcodes) contributions merged in. I decided to create my own fork after the original one went dormant in 2020.
+
 # Example Usage
 
 **View IFS File Structure:** `dumpifs <image.ifs>`
