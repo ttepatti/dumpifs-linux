@@ -1,12 +1,51 @@
-# dumpifs
-Dirty hack dumpifs.
-Modified to be compiled on most platform without QNX SQP.
+# dumpifs-linux
+This is a dirty hack of QNX's dumpifs utility, intended for use on non-QNX Linux systems. A compiled x86-64 ELF is included in the repository, along with the resources to compile the tool on a system without the QNX SDP.
 
-For those who are interested in hacking MIB2 firmware.
-The compress tool support ucl and lzo compressed images only.
-Use on your own risk.
+# Example Usage
 
-# Basic Idea
+**View IFS File Structure:** `dumpifs <image.ifs>`
+
+**Decompress IFS and write to a new file:** `dumpifs -u <image_uncompressed.ifs> <image.ifs>`
+
+**Extract all files from IFS to current directory:** `dumpifs -b -x <image.ifs>`
+
+## Options
+
+```
+dumpifs - dump an image file system
+dumpifs	[-mvxbz -u file] [-f file] image_file_system_file [files]
+ -b           Extract to basenames of files
+ -u file      Put a copy of the uncompressed image file here
+ -d directory The directory to which to extract files. The default is the current working directory. 
+ -v           Verbose
+ -x           Extract files
+ -m           Display MD5 Checksum
+ -f file      Extract named file
+ -z           Disable the zero check while searching for the startup header.
+              This option should be avoided as it makes the search for the
+              startup header less reliable.
+              Note: this may not be supported in the future.
+```
+
+Additional documentation about `dumpifs` may be found on the [QNX Developer Docs Website](https://www.qnx.com/developers/docs/7.0.0/index.html#com.qnx.doc.neutrino.utilities/topic/d/dumpifs.html).
+
+## dumpifs-folderized.sh
+In addition to the basic dumpifs tool, this repository contains the `dumpifs-folderized.sh` script.
+
+This script creates a folderized IFS dump, preserving the directory structure of the IFS file (which is usually lost when using `dumpifs` alone)
+
+Usage: `dumpifs-folderized.sh <image.ifs>`
+
+This script was originally contributed by [sickcodes](https://github.com/sickcodes) and created by [bertelsmann](https://turbo-quattro.com/showthread.php?15648-How-to-extract-a-IFS-file&p=367809&viewfull=1#post367809).
+
+# Specific Use Cases
+
+## MIB2 Firmware IFS Extraction and Modification
+This information has been paraphrased from the original dumpifs repo, and is courtesy of [askac](https://github.com/askac/dumpifs):
+
+For those who are interested in hacking MIB2 firmware, the compress tool only supports ucl and lzo compressed images. _Use this tool at your own risk_.
+
+### Basic Idea
 1. Get firmware  *.ifs.
 2. Get an decompressed image copy by -u command
 3. Modify the decompressed image using hex editor to bypass login (for example, the login script)
