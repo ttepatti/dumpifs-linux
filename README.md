@@ -4,7 +4,18 @@ This is a dirty hack of QNX's dumpifs utility, intended for use on non-QNX Linux
 **Credit:**
 This tool was originally forked from [askac's dumpifs hack](https://github.com/askac/dumpifs), with [sickcodes'](https://github.com/sickcodes) contributions merged in. I decided to create my own fork after the original one went dormant in 2020.
 
-# Example Usage
+# Running dumpifs
+
+A compiled x86-64 ELF has been included in the repository. To run it, it must first be made executable:
+
+```bash
+git clone git@github.com:ttepatti/dumpifs-linux.git
+cd dumpifs-linux/
+chmod +x dumpifs
+./dumpifs
+```
+
+## Example Usage
 
 **View IFS File Structure:** `dumpifs <image.ifs>`
 
@@ -31,6 +42,23 @@ dumpifs	[-mvxbz -u file] [-f file] image_file_system_file [files]
 ```
 
 Additional documentation about `dumpifs` may be found on the [QNX Developer Docs Website](https://www.qnx.com/developers/docs/7.0.0/index.html#com.qnx.doc.neutrino.utilities/topic/d/dumpifs.html).
+
+# Building dumpifs
+
+Install Requirements:
+```bash
+sudo apt install liblzo2-dev libucl-dev
+```
+
+Build Instructions:
+```bash
+git clone git@github.com:ttepatti/dumpifs-linux.git
+cd dumpifs-linux/
+rm dumpifs
+make
+```
+
+The `rm` command is used to remove the existing binary distributed alongside the source code.
 
 ## dumpifs-folderized.sh
 In addition to the basic dumpifs tool, this repository contains the `dumpifs-folderized.sh` script.
